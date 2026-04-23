@@ -22,8 +22,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Grant execute permission to gradlew
-        run: chmod +x ./gradlew
+      - name: Generate Gradle Wrapper
+        run: gradle wrapper --gradle-version 8.5
         working-directory: android_app
 
       - name: Build debug APK
