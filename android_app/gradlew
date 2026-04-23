@@ -1,0 +1,13 @@
+#!/bin/sh
+# Minimal gradle wrapper - downloads gradle-wrapper.jar on first run
+DIR="$(cd "$(dirname "$0")" && pwd)"
+WRAPPER_JAR="$DIR/gradle/wrapper/gradle-wrapper.jar"
+WRAPPER_URL="https://raw.githubusercontent.com/gradle/gradle/v8.5.0/gradle/wrapper/gradle-wrapper.jar"
+
+if [ ! -f "$WRAPPER_JAR" ]; then
+    echo "Downloading gradle-wrapper.jar..."
+    mkdir -p "$DIR/gradle/wrapper"
+    curl -fsSL -o "$WRAPPER_JAR" "$WRAPPER_URL" || wget -q -O "$WRAPPER_JAR" "$WRAPPER_URL"
+fi
+
+exec java -jar "$WRAPPER_JAR" "$@"
